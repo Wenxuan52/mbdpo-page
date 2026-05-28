@@ -1,520 +1,620 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- Primary Meta Tags -->
+<meta content="MBDPO: Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization" name="title"/>
+<meta content="MBDPO unifies search and policy optimization in latent world models with diffusion policy optimization, improving scalable online, offline, and offline-to-online reinforcement learning." name="description"/>
+<meta content="MBDPO, world model, diffusion policy, model-based reinforcement learning, policy optimization, offline reinforcement learning, online reinforcement learning, scaling laws, latent dynamics, control" name="keywords"/>
+<meta content="Xiaoyuan Cheng, Wenxuan Yuan, Zhancun Mu, Yuanzhao Zhang, Yiming Yang, Hai Wang, Zhuo Sun, Che Liu" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="English" name="language"/>
+<!-- Open Graph / Facebook -->
+<meta content="article" property="og:type"/>
+<meta content="MBDPO Project Page" property="og:site_name"/>
+<meta content="MBDPO: Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization" property="og:title"/>
+<meta content="A diffusion policy optimization framework that aligns search and value learning inside learned latent world models, enabling scalable policy learning across 121 control tasks." property="og:description"/>
+<meta content="https://wenxuan52.github.io/mbdpo-page/" property="og:url"/>
+<meta content="https://wenxuan52.github.io/mbdpo-page/static/images/social_preview.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="MBDPO research preview" property="og:image:alt"/>
+<meta content="2026-01-01T00:00:00.000Z" property="article:published_time"/>
+<meta content="Xiaoyuan Cheng" property="article:author"/>
+<meta content="Wenxuan Yuan" property="article:author"/>
+<meta content="Research" property="article:section"/>
+<meta content="World Models" property="article:tag"/>
+<meta content="Diffusion Policy" property="article:tag"/>
+<meta content="Model-Based Reinforcement Learning" property="article:tag"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MBDPO: Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization" name="twitter:title"/>
+<meta content="MBDPO reformulates policy optimization as diffusion over imagined trajectories in latent world models, improving scalable RL across online, offline, and O2O settings." name="twitter:description"/>
+<meta content="https://wenxuan52.github.io/mbdpo-page/static/images/social_preview.png" name="twitter:image"/>
+<meta content="MBDPO research preview" name="twitter:image:alt"/>
+<!-- Academic/Research Specific -->
+<meta content="Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization" name="citation_title"/>
+<meta content="Cheng, Xiaoyuan" name="citation_author"/>
+<meta content="Yuan, Wenxuan" name="citation_author"/>
+<meta content="Mu, Zhancun" name="citation_author"/>
+<meta content="Zhang, Yuanzhao" name="citation_author"/>
+<meta content="Yang, Yiming" name="citation_author"/>
+<meta content="Wang, Hai" name="citation_author"/>
+<meta content="Sun, Zhuo" name="citation_author"/>
+<meta content="Liu, Che" name="citation_author"/>
+<meta content="2026" name="citation_publication_date"/>
+<meta content="Technical Report" name="citation_conference_title"/>
+<meta content="https://arxiv.org/pdf/2605.26282" name="citation_pdf_url"/>
+<!-- Additional SEO -->
+<meta content="#2563eb" name="theme-color"/>
+<meta content="#2563eb" name="msapplication-TileColor"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Preconnect for performance -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://ajax.googleapis.com" rel="preconnect"/>
+<link href="https://cdn.jsdelivr.net" rel="preconnect"/>
+<title>MBDPO | Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization</title>
+<!-- Favicon and App Icons -->
+<link href="static/images/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="static/images/favicon.ico" rel="apple-touch-icon"/>
+<!-- CSS -->
+<link href="static/css/bulma.min.css" rel="stylesheet"/>
+<link href="static/css/index.css" rel="stylesheet"/>
+<link as="style" href="static/css/bulma-carousel.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<link as="style" href="static/css/bulma-slider.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<link as="style" href="static/css/fontawesome.all.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<link as="style" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript>
+<link href="static/css/bulma-carousel.min.css" rel="stylesheet"/>
+<link href="static/css/bulma-slider.min.css" rel="stylesheet"/>
+<link href="static/css/fontawesome.all.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet"/>
+</noscript>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Page-specific styling. You can move this block to static/css/index.css. -->
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .hero:not(.teaser) .container.is-max-desktop { max-width: 1120px !important; }
+    .publication-title { line-height: 1.06; font-weight: 400; font-size: clamp(2.05rem, 3.3vw, 2.85rem); max-width: 1080px; margin-left: auto; margin-right: auto; }
+    .publication-title .title-main {
+      display: block;
+      font-weight: 800;
+      font-size: 1em;
+      background: linear-gradient(90deg, #2563eb 0%, #8b5cf6 48%, #ec4899 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    .publication-title .title-rest { display: block; font-weight: 400; font-size: 1em; }
+    .author-block { display: inline-block; margin: 0 0.25rem; }
+    .author-block sup { font-size: 0.65em; }
+    .publication-authors .author-line { display: block; }
+    .publication-authors .author-line + .author-line { margin-top: 0.18rem; }
+    .venue-line { margin-top: 0.75rem; }
+    .publication-affiliations { margin-top: 0.9rem; line-height: 1.35; }
+    .publication-affiliations .affiliation-line { margin: 0.12rem 0; display: flex; justify-content: center; align-items: center; gap: 1.15rem; flex-wrap: wrap; }
+    .affiliation-pair { display: inline-block; min-width: 0; text-align: center; }
+    .tagline { max-width: 900px; margin-left: auto; margin-right: auto; }
+    .section-label { letter-spacing: .08em; text-transform: uppercase; color: #2563eb; font-weight: 800; font-size: .82rem; margin-bottom: .5rem; }
+    .section-bg-white { background: #fff !important; }
+    .section-bg-soft { background: #fff !important; }
+    .hero .hero-body { padding-bottom: 0.8rem; }
+    .teaser .container { max-width: 1200px !important; }
+    .teaser .hero-body { padding-top: 0.25rem; padding-bottom: 0.6rem; }
+    .hero-separator,
+    .section-separator,
+    .section-divider {
+      border: 0;
+      height: 1px;
+      background: #d6dbe3;
+      width: min(82vw, 1000px);
+      max-width: 1120px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-separator { margin-top: 1.45rem; margin-bottom: 0; }
+    .section-separator,
+    .section-divider { margin-top: 0; margin-bottom: 1.25rem; }
+    .teaser .paper-figure { width: 80%; max-width: 1020px; margin: 0.65rem auto 1.5rem; }
+    #abstract .column.is-four-fifths { flex: none; width: 68%; max-width: 760px; }
+    #abstract .content { line-height: 1.42; }
+    #abstract .content p { margin-bottom: 0.75em; }
+    main > section.section { border-top: 0; position: relative; padding-top: 1.05rem; padding-bottom: 1.15rem; }
+    main > section.section::before {
+      content: "";
+      display: block;
+      height: 1px;
+      background: #d6dbe3;
+      width: min(82vw, 1000px);
+      max-width: 1120px;
+      margin: 0 auto 1.25rem;
+    }
+    .key-card { height: 100%; border-radius: 18px; padding: 1.35rem; background: #fff; box-shadow: 0 8px 28px rgba(15, 23, 42, 0.07); border: 1px solid #eef2f7; }
+    .key-card .icon { color: #2563eb; }
+    .key-card-header { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; text-align: left; min-height: 3.1rem; }
+    .key-card-header .icon { width: 2.45rem; min-width: 2.45rem; margin-bottom: 0; justify-content: flex-start; }
+    .key-card-header .title { margin-bottom: 0; line-height: 1.15; text-align: left; min-height: 2.55rem; display: flex; align-items: center; }
+    .motivation-cards { margin-top: 1.5rem; }
+    .motivation-figure { margin-top: 2rem; }
+    .motivation-caption { max-width: 1050px; margin: 0.85rem auto 0; color: #4b5563; font-size: 0.98rem; line-height: 1.55; text-align: left; }
+    .method-figure .motivation-caption { margin-top: 1.25rem; }
+    .section-bg-soft .motivation-figure,
+    .section-bg-soft .result-block,
+    .section-bg-soft .result-split {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+    .section-bg-soft .motivation-figure { width: 95%; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .section-bg-soft .result-block { width: 90%; max-width: 1100px; }
+    .section-bg-soft .figure-image { background: #fff; }
+    .result-number { font-weight: 800; font-size: 2rem; color: #2563eb; }
+    .result-label { color: #4b5563; font-size: 0.98rem; }
+    .paper-figure { margin-top: 1.35rem; margin-bottom: 1.15rem; overflow: visible; }
+    .figure-image { width: 100%; height: auto; border: none; border-radius: 0; background: #fff; display: block; box-shadow: none; object-fit: contain; }
+    .figure-image.large { width: 100%; height: auto; }
+    .results-showcase { margin-top: 1.7rem; }
+    .result-block { margin: 2.55rem auto; }
+    .results-showcase > .result-block:not(:last-child),
+    .results-showcase > .result-split:not(:last-child) { margin-bottom: 3.15rem; }
+    .result-block .figure-image { width: 100%; margin: 0 auto; }
+    .result-description { max-width: 100%; margin: 0.9rem auto 0; color: #4b5563; font-size: 0.98rem; line-height: 1.55; text-align: left; }
+    .result-split { display: flex; align-items: center; gap: 2rem; width: 95%; max-width: 1100px; margin: 2.55rem auto; }
+    .result-image-col { flex: 0 0 54%; }
+    .result-image-col .figure-image { width: 100%; margin: 0; }
+    .result-text-col { flex: 1; color: #4b5563; font-size: 1rem; line-height: 1.6; }
+    .result-text-col h3 { margin-bottom: 0.65rem; color: #111827; }
+    .gif-row-label { display: inline-block; margin: 1.5rem 0 0.85rem; padding: 0.35rem 0.8rem; border-radius: 999px; background: #e8efff; color: #2563eb; font-weight: 800; letter-spacing: 0.04em; }
+    .gif-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; }
+    .gif-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 0.75rem; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.06); }
+    .gif-caption { margin-bottom: 0.7rem; line-height: 1.28; text-align: center; }
+    .gif-task { display: block; color: #111827; font-size: 1.22rem; font-weight: 800; }
+    .gif-score { display: block; margin-top: 0.65rem; color: #4b5563; font-size: 0.92rem; font-weight: 500; line-height: 1.35; text-align: center; }
+    .gif-card img { width: 100%; height: auto; display: block; border-radius: 0; object-fit: contain; }
+    .bibtex-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .copy-bibtex-btn { border: none; border-radius: 999px; padding: 0.55rem 0.9rem; cursor: pointer; background: #111827; color: #fff; }
+    .citation-note { margin-bottom: 0.9rem; }
+    pre { border-radius: 12px; }
+    .scroll-to-top { position: fixed; right: 18px; bottom: 18px; z-index: 30; border: none; border-radius: 999px; width: 42px; height: 42px; background: #111827; color: #fff; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
-
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
+    .teaser-caption {
+      max-width: 900px;
+      margin: 0.9rem auto 0;
+      color: #4b5563;
+      font-size: 0.98rem !important;
+      line-height: 1.55;
+      text-align: left !important;
+      font-weight: 400;
+    }
+    #abstract .title.is-3 { margin-bottom: 0.55rem !important; }
+    #abstract .content { margin-top: 0.1rem; }
+    .motivation-intro,
+    .visualization-intro {
+      max-width: 1050px;
+      margin: 0.9rem auto 0;
+      color: #4b5563;
+      font-size: 0.98rem !important;
+      line-height: 1.55;
+      text-align: left !important;
+      font-weight: 400;
+    }
+    @media (max-width: 900px) {
+      .publication-affiliations .affiliation-line { gap: 0.55rem; }
+      .affiliation-pair { display: inline-block; min-width: auto; }
+      .teaser .paper-figure { width: 92%; }
+      #abstract .column.is-four-fifths { width: 90%; max-width: 760px; }
+      .result-split { flex-direction: column; }
+      .result-image-col { flex: 1 1 auto; width: 100%; }
+      .result-block .figure-image { width: 100%; }
+      .gif-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .publication-title { font-size: 1.82rem; }
+      .gif-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<!-- JavaScript -->
+<script defer="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer="" src="static/js/fontawesome.all.min.js"></script>
+<script defer="" src="static/js/bulma-carousel.min.js"></script>
+<script defer="" src="static/js/bulma-slider.min.js"></script>
+<script defer="" src="static/js/index.js"></script>
+<!-- Structured Data for Academic Papers -->
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "headline": "Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization",
+    "description": "MBDPO unifies search and policy optimization through diffusion policy representations inside learned latent world models, mitigating search-value misalignment and enabling scalable reinforcement learning.",
     "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
+      {"@type": "Person", "name": "Xiaoyuan Cheng", "affiliation": {"@type": "Organization", "name": "Dynamic Systems Lab, University College London"}},
+      {"@type": "Person", "name": "Wenxuan Yuan", "affiliation": {"@type": "Organization", "name": "College of Computing and Data Science, Nanyang Technological University"}},
+      {"@type": "Person", "name": "Zhancun Mu", "affiliation": {"@type": "Organization", "name": "School of Intelligence Science and Technology, Peking University"}},
+      {"@type": "Person", "name": "Yuanzhao Zhang", "affiliation": {"@type": "Organization", "name": "Santa Fe Institute"}},
+      {"@type": "Person", "name": "Yiming Yang", "affiliation": {"@type": "Organization", "name": "Dynamic Systems Lab, University College London"}},
+      {"@type": "Person", "name": "Hai Wang", "affiliation": {"@type": "Organization", "name": "Dynamic Systems Lab, University College London"}},
+      {"@type": "Person", "name": "Zhuo Sun", "affiliation": {"@type": "Organization", "name": "School of Statistics and Data Science, Shanghai University of Finance and Economics"}},
+      {"@type": "Person", "name": "Che Liu", "affiliation": {"@type": "Organization", "name": "Department of Computing, Imperial College London"}}
     ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
+    "datePublished": "2026-01-01",
+    "publisher": {"@type": "Organization", "name": "arXiv"},
+    "url": "https://arxiv.org/abs/2605.26282",
+    "identifier": "arXiv:2605.26282",
+    "image": "https://wenxuan52.github.io/mbdpo-page/static/images/social_preview.png",
+    "keywords": ["world models", "diffusion policy", "model-based reinforcement learning", "policy optimization", "scaling", "offline reinforcement learning"],
+    "abstract": "Model-based reinforcement learning with world models is limited not only by model bias, but also by a structural misalignment between search and value learning. MBDPO addresses this by formulating policy optimization as a diffusion process over imagined trajectories in latent world models, with an implicit energy function that anchors updates to the behavior distribution. Experiments across online, offline, and offline-to-online settings show strong performance and monotonic scaling with model capacity.",
+    "citation": "@misc{cheng2026scalingworldmodelreinforcementlearning, title={Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization}, author={Xiaoyuan Cheng and Wenxuan Yuan and Zhancun Mu and Yuanzhao Zhang and Yiming Yang and Hai Wang and Zhuo Sun and Che Liu}, year={2026}, eprint={2605.26282}, archivePrefix={arXiv}, primaryClass={cs.LG}, url={http://arxiv.org/abs/2605.26282}}",
     "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
+    "mainEntity": {"@type": "WebPage", "@id": "https://wenxuan52.github.io/mbdpo-page/"},
     "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
-  </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
+      {"@type": "Thing", "name": "Model-Based Reinforcement Learning"},
+      {"@type": "Thing", "name": "World Models"},
+      {"@type": "Thing", "name": "Diffusion Policy Optimization"}
     ]
   }
   </script>
 </head>
 <body>
-
-
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
-
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <main id="main-content">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
-
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Institution Name<br>Conference name and year</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
-
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- TODO: Update with your arXiv paper ID -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<button aria-label="Scroll to top" class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top">
+<i class="fas fa-chevron-up"></i>
+</button>
+<main id="main-content">
+<!-- Hero -->
+<section class="hero section-bg-white">
+<div class="hero-body">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column has-text-centered">
+<h1 class="title is-1 publication-title">
+<span class="title-main">MBDPO:</span>
+<span class="title-rest">Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization</span>
+</h1>
+<div class="is-size-5 publication-authors">
+<div class="author-line">
+<span class="author-block">Xiaoyuan Cheng<sup>1,*</sup></span>
+<span class="author-block">Wenxuan Yuan<sup>2,*</sup></span>
+<span class="author-block">Zhancun Mu<sup>3</sup></span>
+<span class="author-block">Yuanzhao Zhang<sup>4</sup></span>
+<span class="author-block">Yiming Yang<sup>1</sup></span>
+<span class="author-block">Hai Wang<sup>1</sup></span>
+</div>
+<div class="author-line">
+<span class="author-block">Zhuo Sun<sup>5,†</sup></span>
+<span class="author-block">Che Liu<sup>6,†</sup></span>
+</div>
+</div>
+<div class="is-size-6 publication-authors publication-affiliations venue-line">
+<div class="affiliation-line">
+<span class="affiliation-pair"><sup>1</sup>University College London</span>
+<span class="affiliation-pair"><sup>2</sup>Nanyang Technological University</span>
+</div>
+<div class="affiliation-line">
+<span class="affiliation-pair"><sup>3</sup>Peking University</span>
+<span class="affiliation-pair"><sup>4</sup>Santa Fe Institute</span>
+</div>
+<div class="affiliation-line">
+<span class="affiliation-pair"><sup>5</sup>Shanghai University of Finance and Economics</span>
+<span class="affiliation-pair"><sup>6</sup>Imperial College London</span>
+</div>
+<div class="eql-cntrb"><small><sup>*</sup>Core contributors    <sup>†</sup>Corresponding authors</small></div>
+</div>
+<div class="column has-text-centered">
+<div class="publication-links">
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="https://arxiv.org/abs/2605.26282" target="_blank">
+<span class="icon"><i class="fas fa-file-pdf"></i></span>
+<span>Paper</span>
+</a>
+</span>
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="https://github.com/Edmond1Cheng/MBDPO" target="_blank">
+<span class="icon"><i class="fab fa-github"></i></span>
+<span>Code</span>
+</a>
+</span>
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="https://huggingface.co/BruceYuan/MBDPO" target="_blank">
+<span class="icon">🤗</span>
+<span>Hugging Face</span>
+</a>
+</span>
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="#BibTeX">
+<span class="icon"><i class="fas fa-quote-right"></i></span>
+<span>BibTeX</span>
+</a>
+</span>
+</div>
+</div>
+<hr aria-hidden="true" class="hero-separator"/>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
-  </div>
+<!-- Teaser -->
+<section class="hero teaser section-bg-white">
+<div class="container is-max-desktop">
+<div class="hero-body">
+<figure class="paper-figure">
+<img alt="Overview of MBDPO offline and online performance" class="figure-image large" loading="eager" src="static/images/figure_1.png"/>
+</figure>
+<h2 class="subtitle tagline teaser-caption">
+<strong>Overview.</strong> MBDPO scales world-model reinforcement learning. <strong>Left:</strong> in multi-task offline pretraining, MBDPO consistently outperforms TD-MPC2 and shows monotonic performance gains as model size increases. <strong>Right:</strong> in online learning from scratch, MBDPO achieves competitive performance across 121 continuous-control tasks.
+          </h2>
+</div>
+</div>
 </section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+<!-- Abstract -->
+<section class="section section-bg-white" id="abstract">
+<div class="container is-max-desktop">
+<div class="columns is-centered has-text-centered">
+<div class="column is-four-fifths">
+<h2 class="title is-3">Abstract</h2>
+<div class="content has-text-justified">
+<p>
+<strong>MBDPO</strong> is a model-based reinforcement learning framework that unifies search and policy optimization through a diffusion policy inside a learned latent world model. Instead of placing an explicit planner such as MPPI on top of the world model, <strong>MBDPO</strong> reformulates policy optimization as a diffusion process over imagined trajectories, where the score field is corrected by model-based returns and anchored to the behavior distribution via an implicit energy function. This eliminates the structural misalignment between search and value learning that limits prior world-model approaches, and yields <strong>monotonic scaling</strong> of performance with model capacity.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key ideas -->
+<section class="section section-bg-soft">
+<div class="container is-max-desktop">
+<div class="has-text-centered">
+<div class="section-label">Motivation</div>
+<h2 class="title is-3">Why Scaling World-Model RL Remain Hard?</h2>
+<p class="subtitle tagline motivation-intro">
+            Scaling world-model RL is not limited only by model prediction error. A deeper bottleneck is the mismatch between how actions are selected by search and how values are learned from replay data: the planner may move toward actions where the learned value function is unreliable, causing value overestimation and unstable policy improvement.
           </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
+</div>
+<div class="columns is-centered motivation-cards">
+<div class="column">
+<div class="key-card">
+<div class="key-card-header">
+<div class="icon"><i class="fas fa-project-diagram fa-2x"></i></div>
+<h3 class="title is-5">World-Model Score Correction</h3>
+</div>
+<p><strong>MBDPO</strong> uses imagined rollouts in the latent world model to evaluate candidate action sequences and correct the diffusion score toward higher-return behaviors.</p>
 </div>
 </div>
+<div class="column">
+<div class="key-card">
+<div class="key-card-header">
+<div class="icon"><i class="fas fa-shield-alt fa-2x"></i></div>
+<h3 class="title is-5">Implicit Energy Anchor</h3>
+</div>
+<p><strong>MBDPO</strong> learns an implicit energy function from replay data to anchor the policy to the behavior distribution, preventing drift toward unreliable high-value regions.</p>
+</div>
+</div>
+<div class="column">
+<div class="key-card">
+<div class="key-card-header">
+<div class="icon"><i class="fas fa-sync-alt fa-2x"></i></div>
+<h3 class="title is-5">Diffusion Policy</h3>
+</div>
+<p><strong>MBDPO</strong> represents policy improvement as iterative denoising over future action sequences, turning search into a learnable policy optimization process.</p>
+</div>
+</div>
+</div>
+<figure class="paper-figure motivation-figure">
+<img alt="Cross TD error and policy drift comparison" class="figure-image" loading="lazy" src="static/images/figure_3.png"/>
+<figcaption class="motivation-caption">
+            Search-based planners can drift away from the policy distribution used for value learning, leading to larger cross-TD error and relative action drift. <strong>MBDPO</strong> reduces both effects, showing that diffusion policy optimization keeps policy improvement better aligned with value learning.
+          </figcaption>
+</figure>
+</div>
 </section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Method -->
+<section class="section section-bg-white">
+<div class="container is-max-desktop">
+<div class="has-text-centered">
+<div class="section-label">Method</div>
+<h2 class="title is-3">Model-Based Diffusion Policy Optimization (<strong>MBDPO</strong>)</h2>
+<!--          <p class="subtitle tagline">-->
+<!--            MBDPO starts from a Gaussian action-sequence prior and iteratively denoises toward a high-return Gibbs policy. The score is estimated from imagined trajectories in the latent world model and regularized by implicit energy.-->
+<!--          </p>-->
+</div>
+<figure class="paper-figure method-figure">
+<img alt="Core framework of Model-Based Diffusion Policy Optimization" class="figure-image large" loading="lazy" src="static/images/figure_2.png"/>
+<figcaption class="motivation-caption">
+            <strong>MBDPO</strong> starts from Gaussian action-sequence samples and progressively denoises them into high-return behaviors. At each denoising step, candidate action sequences are rolled out through the latent world model, evaluated by their energy-regularized returns, and reweighted to estimate a score direction toward better actions. The learned world model therefore corrects the diffusion score field, while the implicit energy anchor keeps the policy close to the behavior distribution. Together, this transforms generative denoising into model-based policy optimization and unifies search with policy learning.
+          </figcaption>
+</figure>
+</div>
 </section>
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Results summary -->
+<section class="section section-bg-soft">
+<div class="container is-max-desktop">
+<div class="has-text-centered">
+<div class="section-label">Results</div>
+<h2 class="title is-3">Strong Performance Across Online, Offline, and Fine-tuning</h2>
+</div>
+<div class="columns is-centered has-text-centered">
+<div class="column">
+<div class="key-card">
+<div class="result-number">121</div>
+<div class="result-label">control tasks across DMControl, MetaWorld, ManiSkill2, MyoSuite, Locomotion, and Visual RL</div>
+</div>
+</div>
+<div class="column">
+<div class="key-card">
+<div class="result-number">340M</div>
+<div class="result-label">largest world-model scale tested in multi-task offline pretraining</div>
+</div>
+</div>
+<div class="column">
+<div class="key-card">
+<div class="result-number">40K</div>
+<div class="result-label">limited online interactions per unseen task for offline-to-online (O2O) fine-tuning</div>
+</div>
+</div>
+</div>
+<div class="results-showcase">
+<div class="result-block">
+<img alt="Aggregate online performance across benchmarks" class="figure-image" loading="lazy" src="static/images/figure_4.png"/>
+<p class="result-description"><strong>MBDPO</strong> achieves strong online-from-scratch performance across diverse control suites. Compared with SAC, DreamerV3, TD-MPC, and TD-MPC2, <strong>MBDPO</strong> learns faster and reaches higher or competitive final performance across state-based, visual, locomotion, manipulation, and musculoskeletal control tasks.</p>
+</div>
+<div class="result-split">
+<div class="result-image-col">
+<img alt="Multi-task offline scaling results" class="figure-image" loading="lazy" src="static/images/figure_6.png"/>
+</div>
+<div class="result-text-col">
+<h3 class="title is-5">Monotonic Scaling in Offline Pretraining</h3>
+<p><strong>MBDPO</strong> shows monotonic performance gains as model capacity increases from 1.7M to 340M parameters, outperforming TD-MPC2 across model scales in multi-task offline pretraining.</p>
+</div>
+</div>
+<div class="result-block">
+<img alt="Offline-to-online performance" class="figure-image" loading="lazy" src="static/images/figure_7.png"/>
+<p class="result-description">Offline-to-online fine-tuning transfers a pretrained generalist agent to unseen tasks with limited interaction. With only 40K online steps per task, <strong>MBDPO</strong> fine-tuning substantially outperforms training from scratch, demonstrating efficient adaptation from pretrained world-model representations.</p>
+</div>
+<div class="result-block">
+<img alt="Latent trajectory visualization" class="figure-image" loading="lazy" src="static/images/figure_11.png"/>
+<p class="result-description"><strong>MBDPO</strong> produces structured latent trajectories that align with task dynamics. Cyclic control tasks form closed-loop patterns, while manipulation tasks follow directed paths toward the goal, suggesting that the learned world model supports physically meaningful policy optimization.</p>
+</div>
+</div>
+</div>
 </section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
-
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
+<!-- Detailed result figures -->
+<section class="section section-bg-white">
+<div class="container is-max-desktop">
+<div class="has-text-centered">
+<div class="section-label">Visualization</div>
+<h2 class="title is-3">Structured Latent Trajectories</h2>
+<p class="subtitle tagline visualization-intro">
+            <strong>MBDPO</strong> learns latent trajectories that reflect the structure of the underlying control task. Cyclic skills form closed-loop patterns, while goal-directed manipulation tasks produce smooth trajectories from initial states to successful completion.
+          </p>
+</div>
+<div class="has-text-centered">
+<div class="gif-row-label">DMControl</div>
+</div>
+<div aria-label="DMControl GIF visualizations" class="gif-grid">
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Cheetah Run Front</span>
+</div>
+<img alt="Cheetah Run Front latent trajectory visualization" loading="lazy" src="static/gif/1.gif"/>
+<span class="gif-score">Reward: 740.7</span>
+</div>
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Cup Spin</span>
+</div>
+<img alt="Cup Spin latent trajectory visualization" loading="lazy" src="static/gif/2.gif"/>
+<span class="gif-score">Reward: 840.4</span>
+</div>
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Reacher Hard</span>
+</div>
+<img alt="Reacher Hard latent trajectory visualization" loading="lazy" src="static/gif/3.gif"/>
+<span class="gif-score">Reward: 985.0</span>
+</div>
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Walker Run</span>
+</div>
+<img alt="Walker Run latent trajectory visualization" loading="lazy" src="static/gif/4.gif"/>
+<span class="gif-score">Reward: 769.2</span>
+</div>
+</div>
+<div class="has-text-centered">
+<div class="gif-row-label">MetaWorld</div>
+</div>
+<div aria-label="MetaWorld GIF visualizations" class="gif-grid">
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Bin Picking</span>
+</div>
+<img alt="Bin Picking latent trajectory visualization" loading="lazy" src="static/gif/5.gif"/>
+<span class="gif-score">Reward: 1585.0<br/>Success Rate: 1.00</span>
+</div>
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Disassemble</span>
+</div>
+<img alt="Disassemble latent trajectory visualization" loading="lazy" src="static/gif/6.gif"/>
+<span class="gif-score">Reward: 1556.2<br/>Success Rate: 1.00</span>
+</div>
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Door Close</span>
+</div>
+<img alt="Door Close latent trajectory visualization" loading="lazy" src="static/gif/7.gif"/>
+<span class="gif-score">Reward: 1549.1<br/>Success Rate: 1.00</span>
+</div>
+<div class="gif-card">
+<div class="gif-caption">
+<span class="gif-task">Lever Pull</span>
+</div>
+<img alt="Lever Pull latent trajectory visualization" loading="lazy" src="static/gif/8.gif"/>
+<span class="gif-score">Reward: 1664.9<br/>Success Rate: 0.90</span>
+</div>
+</div>
+</div>
+</section>
+<!-- BibTeX -->
+<section class="section section-bg-soft" id="BibTeX">
+<div class="container is-max-desktop content">
+<div class="bibtex-header">
+<h2 class="title">BibTeX</h2>
+<button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+<i class="fas fa-copy"></i>
+<span class="copy-text">Copy</span>
+</button>
+</div>
+<pre id="bibtex-code"><code>@misc{cheng2026scalingworldmodelreinforcementlearning,
+      title={Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization},
+      author={Xiaoyuan Cheng and Wenxuan Yuan and Zhancun Mu and Yuanzhao Zhang and Yiming Yang and Hai Wang and Zhuo Sun and Che Liu},
+      year={2026},
+      eprint={2605.26282},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={http://arxiv.org/abs/2605.26282}
 }</code></pre>
-    </div>
+</div>
 </section>
-<!--End BibTex citation -->
-
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="columns is-centered">
+<div class="column is-8">
+<div class="content has-text-centered">
+<p class="citation-note">
+              Citation: Xiaoyuan Cheng, Wenxuan Yuan, Zhancun Mu, Yuanzhao Zhang, Yiming Yang, Hai Wang, Zhuo Sun, and Che Liu. <em>Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization</em>. arXiv:2605.26282, 2026.
+            </p>
+<p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>, adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            </p>
+</div>
+</div>
+</div>
+</div>
 </footer>
+<script>
+    function copyBibTeX() {
+      const bib = document.querySelector('#bibtex-code code').innerText;
+      navigator.clipboard.writeText(bib).then(() => {
+        const btn = document.querySelector('.copy-bibtex-btn .copy-text');
+        const oldText = btn.innerText;
+        btn.innerText = 'Copied!';
+        setTimeout(() => { btn.innerText = oldText; }, 1600);
+      });
+    }
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
