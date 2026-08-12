@@ -1,0 +1,131 @@
+/* ============================================================
+   Newt MMBench task marquee
+   Five rows of rollouts scrolling continuously in alternating
+   directions. Loaded alongside index.css.
+   ============================================================ */
+
+.task-marquee {
+  position: relative;
+  margin-top: 1.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Static gradient caps rather than a mask on each row. A mask forces the
+   browser to re-composite the entire moving row every single frame, with every
+   playing video inside it — that was the stutter. These are painted once and
+   never move. */
+.task-marquee::before,
+.task-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(36px, 7%, 150px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.task-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.task-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.mm-row {
+  overflow: hidden;
+  /* overflow clips at the padding box, so this padding is the room the tile
+     shadows need in order not to be sheared off. It also supplies the gap
+     between rows, which is why .task-marquee sets none. */
+  padding: 5px 0 20px;
+}
+
+.mm-track {
+  display: flex;
+  column-gap: 14px;
+  width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+  animation-name: mm-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* --mm-distance and animation-duration are set from JS after measuring. */
+}
+
+/* Default flow moves the track leftwards, i.e. content travels right-to-left. */
+@keyframes mm-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(-1 * var(--mm-distance, 0px)), 0, 0); }
+}
+
+/* Rows 1, 3 and 5 run the same keyframes backwards: content travels left-to-right. */
+.mm-row[data-dir="ltr"] .mm-track { animation-direction: reverse; }
+
+.mm-card {
+  flex: 0 0 auto;
+  width: 158px;
+  background: #fff;
+  border: 1px solid #e8ebf0;
+  border-radius: 14px;
+  overflow: hidden;
+  /* Weighted downwards so each tile sits above the page. Kept inside the 20px
+     of row padding above: offset 8 + blur 16 - spread 5 = 19px of reach. */
+  box-shadow: 0 8px 16px -5px rgba(15, 23, 42, 0.24), 0 2px 4px rgba(15, 23, 42, 0.08);
+}
+
+.mm-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #eef2f7;
+}
+
+.mm-name {
+  display: block;
+  padding: 0.5rem 0.4rem 0.6rem;
+  color: #374151;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  /* Two lines of 0.78rem/1.25 plus 1.1rem of padding. Flex already equalises
+     tiles within a row; this keeps the five rows equal to each other too. */
+  min-height: 3.05rem;
+}
+
+@media (max-width: 900px) {
+  .mm-row { padding: 4px 0 16px; }
+  .mm-track { column-gap: 11px; }
+  .mm-card {
+    width: 130px;
+    border-radius: 12px;
+    box-shadow: 0 6px 13px -4px rgba(15, 23, 42, 0.24), 0 2px 4px rgba(15, 23, 42, 0.08);
+  }
+  .mm-name { font-size: 0.72rem; min-height: 2.9rem; }
+}
+
+@media (max-width: 560px) {
+  .mm-row { padding: 3px 0 13px; }
+  .mm-track { column-gap: 9px; }
+  .mm-card {
+    width: 108px;
+    box-shadow: 0 5px 11px -4px rgba(15, 23, 42, 0.24), 0 1px 3px rgba(15, 23, 42, 0.08);
+  }
+  .mm-name { font-size: 0.68rem; padding: 0.42rem 0.3rem 0.5rem; min-height: 2.62rem; }
+}
+
+/* Motion is the whole point here, so when it is unwelcome the rows simply
+   stop and become manually scrollable instead. */
+@media (prefers-reduced-motion: reduce) {
+  .mm-track { animation: none; will-change: auto; }
+  .mm-row { overflow-x: auto; }
+  /* The caps would sit over content the reader is now scrolling by hand. */
+  .task-marquee::before,
+  .task-marquee::after { display: none; }
+}

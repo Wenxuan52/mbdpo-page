@@ -55,8 +55,6 @@
 <!-- Preconnect for performance -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://ajax.googleapis.com" rel="preconnect"/>
-<link href="https://cdn.jsdelivr.net" rel="preconnect"/>
 <title>MBDPO | Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization</title>
 <!-- Favicon and App Icons -->
 <link href="static/images/favicon.ico" rel="icon" type="image/x-icon"/>
@@ -64,21 +62,15 @@
 <!-- CSS -->
 <link href="static/css/bulma.min.css" rel="stylesheet"/>
 <link href="static/css/index.css" rel="stylesheet"/>
-<link as="style" href="static/css/bulma-carousel.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<link as="style" href="static/css/bulma-slider.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<link as="style" href="static/css/fontawesome.all.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<link as="style" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript>
-<link href="static/css/bulma-carousel.min.css" rel="stylesheet"/>
-<link href="static/css/bulma-slider.min.css" rel="stylesheet"/>
-<link href="static/css/fontawesome.all.min.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet"/>
-</noscript>
+<link href="static/css/task-gallery.css" rel="stylesheet"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <!-- Page-specific styling. You can move this block to static/css/index.css. -->
 <style>
     body { font-family: 'Inter', sans-serif; }
+    /* Inline SVG icons (see the sprite at the top of <body>). */
+    .fa-icon { width: 1em; height: 1em; fill: currentColor; display: inline-block; vertical-align: -0.125em; }
+    .fa-icon.is-2x { width: 2em; height: 2em; vertical-align: middle; }
     .hero:not(.teaser) .container.is-max-desktop { max-width: 1120px !important; }
     .publication-title { line-height: 1.06; font-weight: 400; font-size: clamp(2.05rem, 3.3vw, 2.85rem); max-width: 1080px; margin-left: auto; margin-right: auto; }
     .publication-title .title-main {
@@ -178,7 +170,8 @@
     .gif-caption { margin-bottom: 0.7rem; line-height: 1.28; text-align: center; }
     .gif-task { display: block; color: #111827; font-size: 1.22rem; font-weight: 800; }
     .gif-score { display: block; margin-top: 0.65rem; color: #4b5563; font-size: 0.92rem; font-weight: 500; line-height: 1.35; text-align: center; }
-    .gif-card img { width: 100%; height: auto; display: block; border-radius: 0; object-fit: contain; }
+    .gif-card img,
+    .gif-card video { width: 100%; height: auto; display: block; border-radius: 0; object-fit: contain; background: #fff; }
     .bibtex-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .copy-bibtex-btn { border: none; border-radius: 999px; padding: 0.55rem 0.9rem; cursor: pointer; background: #111827; color: #fff; }
     .citation-note { margin-bottom: 0.9rem; }
@@ -222,11 +215,8 @@
     }
   </style>
 <!-- JavaScript -->
-<script defer="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script defer="" src="static/js/fontawesome.all.min.js"></script>
-<script defer="" src="static/js/bulma-carousel.min.js"></script>
-<script defer="" src="static/js/bulma-slider.min.js"></script>
 <script defer="" src="static/js/index.js"></script>
+<script defer="" src="static/js/task-gallery.js"></script>
 <!-- Structured Data for Academic Papers -->
 <script type="application/ld+json">
   {
@@ -263,8 +253,19 @@
   </script>
 </head>
 <body>
+<!-- Inline icon sprite (FontAwesome Free 5 glyphs, CC BY 4.0) - replaces the 1.1 MB fontawesome JS bundle. -->
+<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+<symbol id="icon-chevron-up" viewBox="0 0 448 512"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"/></symbol>
+<symbol id="icon-file-pdf" viewBox="0 0 384 512"><path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z"/></symbol>
+<symbol id="icon-github" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></symbol>
+<symbol id="icon-quote-right" viewBox="0 0 512 512"><path d="M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"/></symbol>
+<symbol id="icon-project-diagram" viewBox="0 0 640 512"><path d="M384 320H256c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V352c0-17.67-14.33-32-32-32zM192 32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v128c0 17.67 14.33 32 32 32h95.72l73.16 128.04C211.98 300.98 232.4 288 256 288h.28L192 175.51V128h224V64H192V32zM608 0H480c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32z"/></symbol>
+<symbol id="icon-shield-alt" viewBox="0 0 512 512"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></symbol>
+<symbol id="icon-sync-alt" viewBox="0 0 512 512"><path d="M370.72 133.28C339.458 104.008 298.888 87.962 255.848 88c-77.458.068-144.328 53.178-162.791 126.85-1.344 5.363-6.122 9.15-11.651 9.15H24.103c-7.498 0-13.194-6.807-11.807-14.176C33.933 94.924 134.813 8 256 8c66.448 0 126.791 26.136 171.315 68.685L463.03 40.97C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.749zM32 296h134.059c21.382 0 32.09 25.851 16.971 40.971l-41.75 41.75c31.262 29.273 71.835 45.319 114.876 45.28 77.418-.07 144.315-53.144 162.787-126.849 1.344-5.363 6.122-9.15 11.651-9.15h57.304c7.498 0 13.194 6.807 11.807 14.176C478.067 417.076 377.187 504 256 504c-66.448 0-126.791-26.136-171.315-68.685L48.97 471.03C33.851 486.149 8 475.441 8 454.059V320c0-13.255 10.745-24 24-24z"/></symbol>
+<symbol id="icon-copy" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></symbol>
+</svg>
 <button aria-label="Scroll to top" class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top">
-<i class="fas fa-chevron-up"></i>
+<svg aria-hidden="true" class="fa-icon"><use href="#icon-chevron-up"></use></svg>
 </button>
 <main id="main-content">
 <!-- Hero -->
@@ -310,13 +311,13 @@
 <div class="publication-links">
 <span class="link-block">
 <a class="external-link button is-normal is-rounded is-dark" href="https://arxiv.org/abs/2605.26282" target="_blank">
-<span class="icon"><i class="fas fa-file-pdf"></i></span>
+<span class="icon"><svg aria-hidden="true" class="fa-icon"><use href="#icon-file-pdf"></use></svg></span>
 <span>Paper</span>
 </a>
 </span>
 <span class="link-block">
 <a class="external-link button is-normal is-rounded is-dark" href="https://github.com/Edmond1Cheng/MBDPO" target="_blank">
-<span class="icon"><i class="fab fa-github"></i></span>
+<span class="icon"><svg aria-hidden="true" class="fa-icon"><use href="#icon-github"></use></svg></span>
 <span>Code</span>
 </a>
 </span>
@@ -328,7 +329,7 @@
 </span>
 <span class="link-block">
 <a class="external-link button is-normal is-rounded is-dark" href="#BibTeX">
-<span class="icon"><i class="fas fa-quote-right"></i></span>
+<span class="icon"><svg aria-hidden="true" class="fa-icon"><use href="#icon-quote-right"></use></svg></span>
 <span>BibTeX</span>
 </a>
 </span>
@@ -382,7 +383,7 @@
 <div class="column">
 <div class="key-card">
 <div class="key-card-header">
-<div class="icon"><i class="fas fa-project-diagram fa-2x"></i></div>
+<div class="icon"><svg aria-hidden="true" class="fa-icon is-2x"><use href="#icon-project-diagram"></use></svg></div>
 <h3 class="title is-5">World-Model Score Correction</h3>
 </div>
 <p><strong>MBDPO</strong> uses imagined rollouts in the latent world model to evaluate candidate action sequences and correct the diffusion score toward higher-return behaviors.</p>
@@ -391,7 +392,7 @@
 <div class="column">
 <div class="key-card">
 <div class="key-card-header">
-<div class="icon"><i class="fas fa-shield-alt fa-2x"></i></div>
+<div class="icon"><svg aria-hidden="true" class="fa-icon is-2x"><use href="#icon-shield-alt"></use></svg></div>
 <h3 class="title is-5">Implicit Energy Anchor</h3>
 </div>
 <p><strong>MBDPO</strong> learns an implicit energy function from replay data to anchor the policy to the behavior distribution, preventing drift toward unreliable high-value regions.</p>
@@ -400,7 +401,7 @@
 <div class="column">
 <div class="key-card">
 <div class="key-card-header">
-<div class="icon"><i class="fas fa-sync-alt fa-2x"></i></div>
+<div class="icon"><svg aria-hidden="true" class="fa-icon is-2x"><use href="#icon-sync-alt"></use></svg></div>
 <h3 class="title is-5">Diffusion Policy</h3>
 </div>
 <p><strong>MBDPO</strong> represents policy improvement as iterative denoising over future action sequences, turning search into a learnable policy optimization process.</p>
@@ -503,28 +504,28 @@
 <div class="gif-caption">
 <span class="gif-task">Cheetah Run Front</span>
 </div>
-<img alt="Cheetah Run Front latent trajectory visualization" loading="lazy" src="static/gif/1.gif"/>
+<video aria-label="Cheetah Run Front latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/1.mp4"></video>
 <span class="gif-score">Reward: 740.7</span>
 </div>
 <div class="gif-card">
 <div class="gif-caption">
 <span class="gif-task">Cup Spin</span>
 </div>
-<img alt="Cup Spin latent trajectory visualization" loading="lazy" src="static/gif/2.gif"/>
+<video aria-label="Cup Spin latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/2.mp4"></video>
 <span class="gif-score">Reward: 840.4</span>
 </div>
 <div class="gif-card">
 <div class="gif-caption">
 <span class="gif-task">Reacher Hard</span>
 </div>
-<img alt="Reacher Hard latent trajectory visualization" loading="lazy" src="static/gif/3.gif"/>
+<video aria-label="Reacher Hard latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/3.mp4"></video>
 <span class="gif-score">Reward: 985.0</span>
 </div>
 <div class="gif-card">
 <div class="gif-caption">
 <span class="gif-task">Walker Run</span>
 </div>
-<img alt="Walker Run latent trajectory visualization" loading="lazy" src="static/gif/4.gif"/>
+<video aria-label="Walker Run latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/4.mp4"></video>
 <span class="gif-score">Reward: 769.2</span>
 </div>
 </div>
@@ -536,32 +537,45 @@
 <div class="gif-caption">
 <span class="gif-task">Bin Picking</span>
 </div>
-<img alt="Bin Picking latent trajectory visualization" loading="lazy" src="static/gif/5.gif"/>
+<video aria-label="Bin Picking latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/5.mp4"></video>
 <span class="gif-score">Reward: 1585.0<br/>Success Rate: 1.00</span>
 </div>
 <div class="gif-card">
 <div class="gif-caption">
 <span class="gif-task">Disassemble</span>
 </div>
-<img alt="Disassemble latent trajectory visualization" loading="lazy" src="static/gif/6.gif"/>
+<video aria-label="Disassemble latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/6.mp4"></video>
 <span class="gif-score">Reward: 1556.2<br/>Success Rate: 1.00</span>
 </div>
 <div class="gif-card">
 <div class="gif-caption">
 <span class="gif-task">Door Close</span>
 </div>
-<img alt="Door Close latent trajectory visualization" loading="lazy" src="static/gif/7.gif"/>
+<video aria-label="Door Close latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/7.mp4"></video>
 <span class="gif-score">Reward: 1549.1<br/>Success Rate: 1.00</span>
 </div>
 <div class="gif-card">
 <div class="gif-caption">
 <span class="gif-task">Lever Pull</span>
 </div>
-<img alt="Lever Pull latent trajectory visualization" loading="lazy" src="static/gif/8.gif"/>
+<video aria-label="Lever Pull latent trajectory visualization" autoplay="" loop="" muted="" playsinline="" preload="metadata" src="static/videos/gif/8.mp4"></video>
 <span class="gif-score">Reward: 1664.9<br/>Success Rate: 0.90</span>
 </div>
 </div>
 </div>
+</section>
+<!-- Newt MMBench task marquee -->
+<section class="section section-bg-white" id="tasks">
+<div class="container is-max-desktop">
+<div class="has-text-centered">
+<div class="section-label">Newt MMBench</div>
+<h2 class="title is-3">MBDPO in 200 Multitask RL</h2>
+<p class="subtitle tagline">
+            Rollouts from <strong>MBDPO</strong> across all 200 tasks of the Newt MMBench suite, spanning locomotion, dexterous and tabletop manipulation, goal-reaching navigation, and pixel-based games.
+          </p>
+</div>
+</div>
+<div class="task-marquee" id="task-marquee"></div>
 </section>
 <!-- BibTeX -->
 <section class="section section-bg-soft" id="BibTeX">
@@ -569,7 +583,7 @@
 <div class="bibtex-header">
 <h2 class="title">BibTeX</h2>
 <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-<i class="fas fa-copy"></i>
+<svg aria-hidden="true" class="fa-icon"><use href="#icon-copy"></use></svg>
 <span class="copy-text">Copy</span>
 </button>
 </div>
@@ -601,20 +615,5 @@
 </div>
 </div>
 </footer>
-<script>
-    function copyBibTeX() {
-      const bib = document.querySelector('#bibtex-code code').innerText;
-      navigator.clipboard.writeText(bib).then(() => {
-        const btn = document.querySelector('.copy-bibtex-btn .copy-text');
-        const oldText = btn.innerText;
-        btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = oldText; }, 1600);
-      });
-    }
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
 </body>
 </html>
