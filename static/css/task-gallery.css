@@ -43,12 +43,20 @@
   padding: 5px 0 18px;
 }
 
+/* Four complete rows make a cleaner cover than clipping the five-row gallery.
+   The lower gallery still renders all five rows and all 200 tasks. */
+.gallery-cover .mm-row:nth-child(n + 5) {
+  display: none;
+}
+
 .gallery-cover .mm-card {
-  width: clamp(120px, 10.2vw, 200px);
+  box-sizing: border-box;
+  width: clamp(80px, calc((100svh - 300px) / 4), 165px);
 }
 
 .gallery-cover .mm-name {
   display: block;
+  box-sizing: border-box;
   min-height: 3rem;
   padding: 0.45rem 0.35rem 0.55rem;
   color: #374151;
@@ -92,8 +100,8 @@
 .gallery-cover .cover-title .title-rest {
   margin-top: 0.7rem;
   color: #171722;
-  font-size: clamp(1.25rem, 2.3vw, 2.2rem);
-  line-height: 1.2;
+  font-size: clamp(1.55rem, 2.7vw, 2.65rem);
+  line-height: 1.15;
   text-align: center;
   text-shadow: none;
 }
