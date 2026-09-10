@@ -165,18 +165,9 @@
     .result-text-col { flex: 1; color: #4b5563; font-size: 1rem; line-height: 1.6; }
     .result-text-col h3 { margin-bottom: 0.65rem; color: #111827; }
     .benchmark-overview { margin-top: 1.5rem; margin-bottom: 2rem; }
-    .benchmark-visualization { margin-top: 3.4rem; }
-    .benchmark-visualization::before {
-      content: "";
-      display: block;
-      height: 1px;
-      width: min(82vw, 1000px);
-      margin: 0 auto 2.2rem;
-      background: #d6dbe3;
-    }
-    .mmbench-container { max-width: 1200px !important; }
+    .latent-result .title { margin-bottom: 0.85rem; }
     .mmbench-results { margin-top: 2rem; }
-    .mmbench-results .result-block { width: 100%; max-width: 1200px; }
+    .mmbench-results .result-block { width: 90%; max-width: 1100px; }
     .mmbench-results .result-block + .result-block { margin-top: 3.25rem; }
     .mmbench-results .title { margin-bottom: 0.65rem; }
     .gif-row-label { display: inline-block; margin: 1.5rem 0 0.85rem; padding: 0.35rem 0.8rem; border-radius: 999px; background: #e8efff; color: #2563eb; font-weight: 800; letter-spacing: 0.04em; }
@@ -485,20 +476,10 @@
 <img alt="Offline-to-online performance" class="figure-image" loading="lazy" src="static/images/figure_7.png"/>
 <p class="result-description">Offline-to-online fine-tuning transfers a pretrained generalist agent to unseen tasks with limited interaction. With only 40K online steps per task, <strong>MBDPO</strong> fine-tuning substantially outperforms training from scratch, demonstrating efficient adaptation from pretrained world-model representations.</p>
 </div>
-<div class="result-block">
+<div class="result-block latent-result">
+<h3 class="title is-5 has-text-centered">Structured Latent Trajectories</h3>
 <img alt="Latent trajectory visualization" class="figure-image" loading="lazy" src="static/images/figure_11.png"/>
-<p class="result-description"><strong>MBDPO</strong> produces structured latent trajectories that align with task dynamics. Cyclic control tasks form closed-loop patterns, while manipulation tasks follow directed paths toward the goal, suggesting that the learned world model supports physically meaningful policy optimization.</p>
-</div>
-</div>
-<!-- Detailed TD-MPC2 benchmark visualizations -->
-<div class="benchmark-visualization">
-<div class="has-text-centered">
-<div class="section-label">Visualization</div>
-<h2 class="title is-3">Structured Latent Trajectories</h2>
-<p class="subtitle tagline visualization-intro">
-            <strong>MBDPO</strong> learns latent trajectories that reflect the structure of the underlying control task. Cyclic skills form closed-loop patterns, while goal-directed manipulation tasks produce smooth trajectories from initial states to successful completion.
-          </p>
-</div>
+<p class="result-description"><strong>MBDPO</strong> produces structured latent trajectories that align with task dynamics. Cyclic control tasks form closed-loop patterns, while manipulation tasks follow directed paths toward the goal. Representative rollouts from the TD-MPC2 benchmark suite are shown below.</p>
 <div class="has-text-centered">
 <div class="gif-row-label">DMControl</div>
 </div>
@@ -567,10 +548,11 @@
 </div>
 </div>
 </div>
+</div>
 </section>
 <!-- MMBench in Newt -->
 <section class="section section-bg-white" id="tasks">
-<div class="container mmbench-container">
+<div class="container is-max-desktop">
 <div class="has-text-centered">
 <div class="section-label">MMBench in Newt</div>
 <h2 class="title is-3">Scaling Across 200 Multitask RL Tasks</h2>
