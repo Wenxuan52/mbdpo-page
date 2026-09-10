@@ -15,7 +15,7 @@
 <meta content="article" property="og:type"/>
 <meta content="MBDPO Project Page" property="og:site_name"/>
 <meta content="MBDPO: Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization" property="og:title"/>
-<meta content="A diffusion policy optimization framework that aligns search and value learning inside learned latent world models, enabling scalable policy learning across 121 control tasks." property="og:description"/>
+<meta content="A diffusion policy optimization framework evaluated on the TD-MPC2 benchmark suite and Newt MMBench, including 200-task scaling across 10 domains." property="og:description"/>
 <meta content="https://wenxuan52.github.io/mbdpo-page/" property="og:url"/>
 <meta content="https://wenxuan52.github.io/mbdpo-page/static/images/social_preview.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
@@ -164,6 +164,21 @@
     .result-image-col .figure-image { width: 100%; margin: 0; }
     .result-text-col { flex: 1; color: #4b5563; font-size: 1rem; line-height: 1.6; }
     .result-text-col h3 { margin-bottom: 0.65rem; color: #111827; }
+    .benchmark-overview { margin-top: 1.5rem; margin-bottom: 2rem; }
+    .benchmark-visualization { margin-top: 3.4rem; }
+    .benchmark-visualization::before {
+      content: "";
+      display: block;
+      height: 1px;
+      width: min(82vw, 1000px);
+      margin: 0 auto 2.2rem;
+      background: #d6dbe3;
+    }
+    .mmbench-container { max-width: 1200px !important; }
+    .mmbench-results { margin-top: 2rem; }
+    .mmbench-results .result-block { width: 100%; max-width: 1200px; }
+    .mmbench-results .result-block + .result-block { margin-top: 3.25rem; }
+    .mmbench-results .title { margin-bottom: 0.65rem; }
     .gif-row-label { display: inline-block; margin: 1.5rem 0 0.85rem; padding: 0.35rem 0.8rem; border-radius: 999px; background: #e8efff; color: #2563eb; font-weight: 800; letter-spacing: 0.04em; }
     .gif-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; }
     .gif-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 0.75rem; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.06); }
@@ -341,19 +356,6 @@
 </div>
 </div>
 </section>
-<!-- Teaser -->
-<section class="hero teaser section-bg-white">
-<div class="container is-max-desktop">
-<div class="hero-body">
-<figure class="paper-figure">
-<img alt="Overview of MBDPO offline and online performance" class="figure-image large" loading="eager" src="static/images/figure_1.png"/>
-</figure>
-<h2 class="subtitle tagline teaser-caption">
-<strong>Overview.</strong> MBDPO scales world-model reinforcement learning. <strong>Left:</strong> in multi-task offline pretraining, MBDPO consistently outperforms TD-MPC2 and shows monotonic performance gains as model size increases. <strong>Right:</strong> in online learning from scratch, MBDPO achieves competitive performance across 121 continuous-control tasks.
-          </h2>
-</div>
-</div>
-</section>
 <!-- Abstract -->
 <section class="section section-bg-white" id="abstract">
 <div class="container is-max-desktop">
@@ -434,12 +436,16 @@
 </figure>
 </div>
 </section>
-<!-- Results summary -->
+<!-- Benchmarks in TD-MPC2 -->
 <section class="section section-bg-soft">
 <div class="container is-max-desktop">
 <div class="has-text-centered">
-<div class="section-label">Results</div>
+<div class="section-label">Benchmarks in TD-MPC2</div>
 <h2 class="title is-3">Strong Performance Across Online, Offline, and Fine-tuning</h2>
+</div>
+<div class="result-block benchmark-overview">
+<img alt="Overview of MBDPO offline and online performance on benchmarks used in TD-MPC2" class="figure-image large" loading="eager" src="static/images/figure_1.png"/>
+<p class="result-description"><strong>Overview.</strong> On the benchmark suite used in TD-MPC2, <strong>MBDPO</strong> scales consistently in multi-task offline pretraining and achieves strong online-from-scratch performance across 121 continuous-control tasks.</p>
 </div>
 <div class="columns is-centered has-text-centered">
 <div class="column">
@@ -484,11 +490,8 @@
 <p class="result-description"><strong>MBDPO</strong> produces structured latent trajectories that align with task dynamics. Cyclic control tasks form closed-loop patterns, while manipulation tasks follow directed paths toward the goal, suggesting that the learned world model supports physically meaningful policy optimization.</p>
 </div>
 </div>
-</div>
-</section>
-<!-- Detailed result figures -->
-<section class="section section-bg-white">
-<div class="container is-max-desktop">
+<!-- Detailed TD-MPC2 benchmark visualizations -->
+<div class="benchmark-visualization">
 <div class="has-text-centered">
 <div class="section-label">Visualization</div>
 <h2 class="title is-3">Structured Latent Trajectories</h2>
@@ -563,15 +566,34 @@
 </div>
 </div>
 </div>
+</div>
 </section>
-<!-- Newt MMBench task marquee -->
+<!-- MMBench in Newt -->
 <section class="section section-bg-white" id="tasks">
-<div class="container is-max-desktop">
+<div class="container mmbench-container">
 <div class="has-text-centered">
-<div class="section-label">Newt MMBench</div>
-<h2 class="title is-3">MBDPO in 200 Multitask RL</h2>
+<div class="section-label">MMBench in Newt</div>
+<h2 class="title is-3">Scaling Across 200 Multitask RL Tasks</h2>
 <p class="subtitle tagline">
-            Rollouts from <strong>MBDPO</strong> across all 200 tasks of the Newt MMBench suite, spanning locomotion, dexterous and tabletop manipulation, goal-reaching navigation, and pixel-based games.
+            We evaluate <strong>MBDPO</strong> on all 200 tasks and 10 domains of Newt MMBench, comparing model scaling and final performance with Newt and other multitask baselines.
+          </p>
+</div>
+<div class="mmbench-results">
+<div class="result-block">
+<h3 class="title is-5 has-text-centered">Overall Model Scaling</h3>
+<img alt="Overall model scaling comparison between MBDPO and Newt on MMBench" class="figure-image" loading="lazy" src="static/images/mmbench_overall_scaling.png"/>
+<p class="result-description">Average normalized performance across the 200-task suite over 100M environment steps. <strong>MBDPO</strong> exhibits consistent gains as model capacity increases, shown alongside the reported Newt scaling curves.</p>
+</div>
+<div class="result-block">
+<h3 class="title is-5 has-text-centered">Performance Across 10 Domains</h3>
+<img alt="Per-domain MMBench comparison of MBDPO, Newt, TD-MPC2, FastTD3, PPO, and single-task behavior cloning" class="figure-image" loading="lazy" src="static/images/mmbench_per_domain.png"/>
+<p class="result-description">Final performance at 100M environment steps across all 10 MMBench domains. <strong>MBDPO</strong> outperforms Newt in 9 of 10 domains and is compared with TD-MPC2, FastTD3, PPO, and single-task behavior cloning.</p>
+</div>
+</div>
+<div class="has-text-centered">
+<h3 class="title is-4">Rollouts Across All 200 Tasks</h3>
+<p class="subtitle tagline">
+            Qualitative rollouts from <strong>MBDPO</strong> spanning locomotion, dexterous and tabletop manipulation, goal-reaching navigation, and pixel-based games.
           </p>
 </div>
 </div>
