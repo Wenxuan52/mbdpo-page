@@ -10,10 +10,10 @@
   isolation: isolate;
   display: grid;
   min-height: 620px;
-  height: clamp(620px, 100svh, 900px);
+  height: clamp(620px, 100svh, 950px);
   place-items: center;
   overflow: hidden;
-  background: #0f172a;
+  background: #fff;
 }
 
 .gallery-cover-media,
@@ -40,49 +40,62 @@
 }
 
 .gallery-cover .mm-row {
-  padding: 4px 0 12px;
+  padding: 5px 0 18px;
 }
 
 .gallery-cover .mm-card {
-  width: clamp(74px, calc((100svh - 220px) / 5), 132px);
+  width: clamp(120px, 10.2vw, 200px);
 }
 
 .gallery-cover .mm-name {
   display: block;
-  min-height: 1.8rem;
-  padding: 0.25rem 0.25rem 0.35rem;
+  min-height: 3rem;
+  padding: 0.45rem 0.35rem 0.55rem;
   color: #374151;
-  font-size: clamp(0.5rem, 0.7vw, 0.65rem);
+  font-size: clamp(0.68rem, 0.9vw, 0.9rem);
 }
 
-/* The first layer is the requested 60% rectangle over the full video field. */
+/* Wash the moving video wall toward white, as in the reference cover. */
 .gallery-cover-dim {
   z-index: 1;
-  background: rgba(8, 15, 28, 0.60);
+  background: rgba(255, 255, 255, 0.60);
 }
 
-/* A lightly frosted white panel keeps the paper title legible while its broad
-   shadow feathers the rectangle into the moving gallery behind it. */
+/* The center banner has no hard outline. Its white field and broad glow blend
+   into the washed-out videos instead of reading as a separate card. */
 .gallery-cover-title-panel {
   position: relative;
   z-index: 2;
-  width: min(960px, calc(100% - 2rem));
-  padding: clamp(1.6rem, 4vw, 3.2rem);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.10);
-  box-shadow: 0 0 72px 24px rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-sizing: border-box;
+  width: min(1040px, calc(100% - 4rem));
+  padding: clamp(1.8rem, 4vw, 3.2rem);
+  border: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 0 64px 42px rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
 }
 
 .gallery-cover .cover-title {
-  margin-bottom: 0;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gallery-cover .cover-title .title-main {
+  font-size: clamp(3.2rem, 6vw, 5.7rem);
+  line-height: 0.95;
 }
 
 .gallery-cover .cover-title .title-rest {
-  color: rgba(255, 255, 255, 0.96);
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.38);
+  margin-top: 0.7rem;
+  color: #171722;
+  font-size: clamp(1.25rem, 2.3vw, 2.2rem);
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: none;
 }
 
 .task-marquee {
