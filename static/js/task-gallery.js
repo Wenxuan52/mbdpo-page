@@ -79,8 +79,7 @@
         return card;
     }
 
-    function init() {
-        const host = document.getElementById('task-marquee');
+    function initHost(host) {
         if (!host || !ROWS.length) return;
 
         const tracks = [];
@@ -185,6 +184,10 @@
             });
         }, {rootMargin: '100px 0px'});
         section.observe(host);
+    }
+
+    function init() {
+        document.querySelectorAll('[data-task-marquee]').forEach(initHost);
     }
 
     if (document.readyState === 'loading') {

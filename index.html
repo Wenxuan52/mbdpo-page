@@ -62,7 +62,7 @@
 <!-- CSS -->
 <link href="static/css/bulma.min.css" rel="stylesheet"/>
 <link href="static/css/index.css" rel="stylesheet"/>
-<link href="static/css/task-gallery.css" rel="stylesheet"/>
+<link href="static/css/task-gallery.css?v=20260910" rel="stylesheet"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <!-- Page-specific styling. You can move this block to static/css/index.css. -->
@@ -99,20 +99,6 @@
     .hero .hero-body { padding-bottom: 0.8rem; }
     .teaser .container { max-width: 1200px !important; }
     .teaser .hero-body { padding-top: 0.25rem; padding-bottom: 0.6rem; }
-    .hero-separator,
-    .section-separator,
-    .section-divider {
-      border: 0;
-      height: 1px;
-      background: #d6dbe3;
-      width: min(82vw, 1000px);
-      max-width: 1120px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-separator { margin-top: 1.45rem; margin-bottom: 0; }
-    .section-separator,
-    .section-divider { margin-top: 0; margin-bottom: 1.25rem; }
     .teaser .paper-figure { width: 80%; max-width: 1020px; margin: 0.65rem auto 1.5rem; }
     #abstract .column.is-four-fifths { flex: none; width: 68%; max-width: 760px; }
     #abstract .content { line-height: 1.42; }
@@ -222,7 +208,7 @@
   </style>
 <!-- JavaScript -->
 <script defer="" src="static/js/index.js"></script>
-<script defer="" src="static/js/task-gallery.js"></script>
+<script defer="" src="static/js/task-gallery.js?v=20260910"></script>
 <!-- Structured Data for Academic Papers -->
 <script type="application/ld+json">
   {
@@ -274,16 +260,25 @@
 <svg aria-hidden="true" class="fa-icon"><use href="#icon-chevron-up"></use></svg>
 </button>
 <main id="main-content">
+<!-- MMBench rollout cover -->
+<section aria-labelledby="cover-title" class="gallery-cover">
+<div aria-hidden="true" class="gallery-cover-media">
+<div class="task-marquee" data-task-marquee="" id="cover-task-marquee"></div>
+</div>
+<div aria-hidden="true" class="gallery-cover-dim"></div>
+<div class="gallery-cover-title-panel">
+<h1 class="title is-1 publication-title cover-title" id="cover-title">
+<span class="title-main">MBDPO:</span>
+<span class="title-rest">Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization</span>
+</h1>
+</div>
+</section>
 <!-- Hero -->
-<section class="hero section-bg-white">
+<section class="hero author-hero section-bg-white">
 <div class="hero-body">
 <div class="container is-max-desktop">
 <div class="columns is-centered">
 <div class="column has-text-centered">
-<h1 class="title is-1 publication-title">
-<span class="title-main">MBDPO:</span>
-<span class="title-rest">Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization</span>
-</h1>
 <div class="is-size-5 publication-authors">
 <div class="author-line">
 <span class="author-block">Xiaoyuan Cheng<sup>1,*</sup></span>
@@ -341,7 +336,6 @@
 </span>
 </div>
 </div>
-<hr aria-hidden="true" class="hero-separator"/>
 </div>
 </div>
 </div>
@@ -579,7 +573,7 @@
           </p>
 </div>
 </div>
-<div class="task-marquee" id="task-marquee"></div>
+<div class="task-marquee" data-task-marquee="" id="task-marquee"></div>
 </section>
 <!-- BibTeX -->
 <section class="section section-bg-soft" id="BibTeX">
